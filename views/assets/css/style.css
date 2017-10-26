@@ -1,0 +1,69 @@
+body {
+  margin-bottom: 20vh;
+}
+
+h1 {
+  margin:10px auto;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+.game-area {
+  padding:10px 0px;
+  margin:10px;
+  border:2px solid gray;
+  border-radius: 10px
+}
+
+.comment-area {
+  margin:10px;
+  border:1px solid gray;
+  border-radius: 12px
+}
+
+.comment-area p {
+  padding:2px 0 0 0;
+}
+.comment-area button {
+  border-radius:10px;
+  margin-left:-2px;
+}
+
+img {
+  float:left;
+  margin: 0 auto;
+  width:100%;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+}
+
+span {
+  color:blue;
+  background-color: gold;
+  border-radius: 20px;
+  padding:5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.create-update-form {
+  padding: 5px;
+  margin: 5px;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}

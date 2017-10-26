@@ -1,0 +1,57 @@
+<h1>Top Games</h1>
+<div class="container">
+  <h4><a class="btn btn-warning" href="/">All Games</a> Number of Saved Games: {{games.length}}</h4>
+  <h2>Saved Games</h2>
+  <ul style="list-style: none;">
+    
+    {{#each games}}
+      <div class="game-area row">
+        <div class="col-sm-2">
+          <img src="{{this.imageURL}}"/>
+        </div>
+        <div class="col-sm-10">
+          <h3>{{this.title}} <span>Rating: {{this.rating}}</span></h3>
+          <a target="_blank" href="{{this.link}}">{{this.link}}</a>
+          <p>{{this.summary}}</p>
+          <form style="display:inline" action="/games/remove/{{this.id}}?_method=POST" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button class="btn btn-info" type="submit">Unsave</button>
+          </form>
+          <button href="#" class="btn btn-info" class="comments-button" data-toggle="modal" data-target="#myModal{{this.id}}">Comments</button>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Comments for {{this.title}}</h5>
+                </div>
+                <div class="modal-body">
+                  <p>Number of Comments: {{this.comments.length}}</p>
+                  {{#each this.comments}}
+                    <div class="comment-area row">
+                      <div class="col-sm-11">
+                        <p>{{this.comment}}</p>
+                      </div>
+                      <div class="col-sm-1">
+                        <form action="/games/delete/comment/{{this.id}}?_method=DELETE" method="POST">
+                          <input type="hidden" name="devoured" value="true">
+                          <button class="btn btn-danger" type="submit">x</button>
+                        </form>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+                <div class="modal-body">
+                  <form action="games/comment/{{this.id}}" method="POST">
+                    <input type="text" id="comment" name="comment">
+                    <button class="btn btn-info" type="submit">Add Comment</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </ul>
+</div>

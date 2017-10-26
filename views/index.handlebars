@@ -1,0 +1,27 @@
+<h1>Top Games</h1>
+<div class="container">
+  <h4><a class="btn btn-warning" href="/saved">Saved Games</a> <a class="btn btn-warning" href="/scrape">Scrape Games</a> Number of Games: {{games.length}}</h4>
+  <h2>Games</h2>
+  <ul style="list-style: none;">
+    {{#each games}}
+      <div class="game-area row">
+        <div class="col-sm-2">
+          <img src="{{this.imageURL}}"/>
+        </div>
+        <div class="col-sm-10">
+          <h3>{{this.title}} <span>Rating: {{this.rating}}</span></h3>
+          <a target="_blank" href="{{this.link}}">{{this.link}}</a>
+          <p>{{this.summary}}</p>
+          <form style="display:inline"action="/games/{{this.id}}?_method=POST" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button class="btn btn-info" type="submit">SAVE</button>
+          </form>
+
+          <form style="display:inline" action="/games/{{this.id}}?_method=DELETE" method="POST">
+            <button class="btn btn-info" type="submit">DELETE!</button>
+          </form>
+        </div>
+      </div>
+    {{/each}}
+  </ul>
+</div>
