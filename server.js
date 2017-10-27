@@ -20,7 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/topgames";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 
 var methodOverride = require("method-override");
 app.use(methodOverride("_method"));
@@ -55,7 +57,7 @@ app.get("/scrape", function(req, res) {
   }).then(function() {
     request("https://www.gamespot.com/reviews", function(error, response, html) {
       if(error) {
-        return console.log(error);
+        return console.log(error + "Stufffffffffff");
       }
 
       var $ = cheerio.load(html);
