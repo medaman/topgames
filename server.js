@@ -55,15 +55,15 @@ app.get("/scrape", function(req, res) {
     }
     results = data;
   }).then(function() {
-    request("https://www.reddit.com/", function(error, response, html) {
+    request("https://www.gamespot.com/reviews/", function(error, response, html) {
       if(error) {
         return console.log(); 
       }
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($("p.title"));
-      $("p.title").each(function(i, element) {
+      console.log($("article.media-game"));
+      $("article.media-game").each(function(i, element) {
 
         var title = $(this)
           .children("a")
