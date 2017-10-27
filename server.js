@@ -62,8 +62,6 @@ app.get("/scrape", function(req, res) {
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($);
-      console.log(html);
       $(".media-game").each(function(i, element) {
         var title = $(this)
           .children("a")
@@ -82,6 +80,13 @@ app.get("/scrape", function(req, res) {
           .children("img")
           .attr("src");
         var alreadyThere = false;
+        var newGame = {
+          title: title,
+          link: link,
+          summary: summary,
+          rating: rating,
+          imageURL: imageURL
+        };
         for(var j=0; j<results.length; j++) {
           if (results[j].link === link) {
             alreadyThere=true;
@@ -89,13 +94,6 @@ app.get("/scrape", function(req, res) {
         }
         if(!alreadyThere) {
           added++;
-          var newGame = {
-            title: title,
-            link: link,
-            summary: summary,
-            rating: rating,
-            imageURL: imageURL
-          };
           console.log(newGame)
             results.push(newGame);
             db.Game
