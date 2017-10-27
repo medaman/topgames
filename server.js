@@ -62,7 +62,7 @@ app.get("/scrape", function(req, res) {
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($("body"));
+      console.log($("a.js-event-tracking"));
       $("a.js-event-tracking").each(function(i, element) {
 
         var title = $(this)
