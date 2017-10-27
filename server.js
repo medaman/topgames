@@ -55,28 +55,26 @@ app.get("/scrape", function(req, res) {
     }
     results = data;
   }).then(function() {
-    request("https://www.gamespot.com/reviews/", function(error, response, html) {
+    request("https://www.reddit.com/", function(error, response, html) {
       if(error) {
         return console.log(); 
       }
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($("a.js-event-tracking"));
-      $("a.js-event-tracking").each(function(i, element) {
+      $("div.thing").each(function(i, element) {
 
         var title = $(this)
-          .attr("data-event-title").replace(/ \w+[.!?]?$/, '');
+          .find("a.title")
+          .text();
         var link = "http://www.gamespot.com" + $(this)
+          .find("a.title")
           .attr("href");
         var summary = $(this)
-          .find(".media-deck")
-          .text();
-        var rating = $(this)
-          .find(".media-well--review-score")
+          .find("p.tagline")
           .text();
         var imageURL = $(this)
-          .find(".media-img")
+          .find("a.thumbnail")
           .children("img")
           .attr("src");
         var alreadyThere = false;
@@ -91,7 +89,6 @@ app.get("/scrape", function(req, res) {
             title: title,
             link: link,
             summary: summary,
-            rating: rating,
             imageURL: imageURL
           };
           console.log(newGame)
