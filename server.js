@@ -45,13 +45,15 @@ app.get("/", function(req, res) {
   }).sort({rating:-1});
 });
 
+var results;
+
 app.get("/scrape", function(req, res) {
   
   db.Game.find({}, function(err, data) {
     if(err) {
       return console.log(err);
     }
-    var results = data;
+    results = data;
   }).then(function() {
     request("https://www.gamespot.com/reviews/", function(error, response, html) {
       if(error) {
@@ -61,13 +63,11 @@ app.get("/scrape", function(req, res) {
       var $ = cheerio.load(html);
       var added = 0;
       console.log($("body"));
-      $("article.media-game").each(function(i, element) {
+      $("a.js-event-tracking").each(function(i, element) {
 
         var title = $(this)
-          .children("a")
           .attr("data-event-title").replace(/ \w+[.!?]?$/, '');
         var link = "http://www.gamespot.com" + $(this)
-          .children("a")
           .attr("href");
         var summary = $(this)
           .find(".media-deck")
