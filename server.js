@@ -62,7 +62,7 @@ app.get("/scrape", function(req, res) {
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($(".media-game"));
+      console.log($("article"));
       $("article").each(function(i, element) {
 
         var title = $(this)
