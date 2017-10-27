@@ -57,13 +57,14 @@ app.get("/scrape", function(req, res) {
   }).then(function() {
     request("http://www.gamespot.com/reviews", function(error, response, html) {
       if(error) {
-        return console.log(error + "Stufffffffffff");
+        return console.log(error);
       }
 
       var $ = cheerio.load(html);
       var added = 0;
+      console.log($);
+      console.log(html);
       $(".media-game").each(function(i, element) {
-
         var title = $(this)
           .children("a")
           .attr("data-event-title").replace(/ \w+[.!?]?$/, '');
