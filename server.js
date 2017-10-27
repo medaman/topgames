@@ -32,8 +32,6 @@ mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
-var results = [];
-
 // Routes
 
 app.get("/", function(req, res) {
@@ -53,7 +51,7 @@ app.get("/scrape", function(req, res) {
     if(err) {
       return console.log(err);
     }
-    results = data;
+    var results = data;
   }).then(function() {
     request("https://www.gamespot.com/reviews/", function(error, response, html) {
       if(error) {
