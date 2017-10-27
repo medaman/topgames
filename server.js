@@ -57,13 +57,13 @@ app.get("/scrape", function(req, res) {
   }).then(function() {
     request("http://www.gamespot.com/reviews", function(error, response, html) {
       if(error) {
-        return console.log();
+        return console.log(); 
       }
 
       var $ = cheerio.load(html);
       var added = 0;
-      console.log($("article"));
-      $("article").each(function(i, element) {
+      console.log($("p.title"));
+      $("p.title").each(function(i, element) {
 
         var title = $(this)
           .children("a")
