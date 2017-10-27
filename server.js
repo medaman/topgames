@@ -55,7 +55,7 @@ app.get("/scrape", function(req, res) {
     }
     results = data;
   }).then(function() {
-    request("http://www.gamespot.com/reviews", function(error, response, html) {
+    request("https://www.reddit.com/", function(error, response, html) {
       if(error) {
         return console.log(); 
       }
