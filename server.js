@@ -20,9 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/topgames";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 var methodOverride = require("method-override");
 app.use(methodOverride("_method"));
