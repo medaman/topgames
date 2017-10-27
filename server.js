@@ -55,7 +55,7 @@ app.get("/scrape", function(req, res) {
     }
     results = data;
   }).then(function() {
-    request("https://www.gamespot.com/reviews", function(error, response, html) {
+    request("http://www.gamespot.com/reviews", function(error, response, html) {
       if(error) {
         return console.log(error + "Stufffffffffff");
       }
@@ -67,7 +67,7 @@ app.get("/scrape", function(req, res) {
         var title = $(this)
           .children("a")
           .attr("data-event-title").replace(/ \w+[.!?]?$/, '');
-        var link = "https://www.gamespot.com" + $(this)
+        var link = "http://www.gamespot.com" + $(this)
           .children("a")
           .attr("href");
         var summary = $(this)
