@@ -17,13 +17,6 @@ app.use(express.static("views"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/topgames";
-
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
-
 var methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
@@ -31,6 +24,13 @@ var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/topgames";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 
 var results = [];
 
@@ -62,6 +62,7 @@ app.get("/scrape", function(req, res) {
 
       var $ = cheerio.load(html);
       var added = 0;
+      console.log($(".media-game"));
       $(".media-game").each(function(i, element) {
 
         var title = $(this)
